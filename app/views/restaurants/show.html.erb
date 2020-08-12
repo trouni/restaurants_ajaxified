@@ -1,0 +1,27 @@
+<div class="container" data-controller="expand">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1><%= @restaurant.name %> <small><%= @restaurant.address %></small></h1>
+      <h2>
+        <%= pluralize @restaurant.reviews.size, "review" %>
+      </h2>
+
+      <button class="btn btn-primary" data-action="click->expand#openElement">Leave a review</button>
+      <div data-target="expand.elementToExpand">
+        <%= simple_form_for([ @restaurant, @review ], remote: true) do |f| %>
+          <%= f.input :rating, input_html: { min: 1, max: 5, value: 5 } %>
+          <%= f.input :content, as: :text %>
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+
+      <div id="reviews" data-controller="infinite-scroll" data-target="infinite-scroll.reviews">
+        <% if @restaurant.reviews.blank? %>
+        Be the first to leave a review for <%= @restaurant.name %>
+        <% else %>
+          <%= render 'reviews/page', reviews: @reviews %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

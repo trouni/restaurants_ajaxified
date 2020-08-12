@@ -83,6 +83,8 @@ GEM
       railties (>= 3.2)
     erubi (1.9.0)
     execjs (2.7.0)
+    faker (2.10.2)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     font-awesome-sass (5.13.0)
       sassc (>= 1.11)
@@ -193,6 +195,9 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    turbolinks_render (0.9.20)
+      rails (>= 5.2.0)
+      turbolinks-source (~> 5.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     web-console (4.0.4)
@@ -211,6 +216,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.4.0)
@@ -224,6 +230,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   dotenv-rails
+  faker
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.2)
@@ -238,10 +245,12 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
+  turbolinks_render
   tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
+  will_paginate
 
 RUBY VERSION
    ruby 2.6.5p114
