@@ -1,8 +1,11 @@
 # Creating JavaScript components with Stimulus
 
-## Inline Modal
+---
+
+## Example component: Inline Modal
 
 Let's create an "inline modal" component for the `reviews#new` form, that expands when we click on a button.
+
 
 ### Stimulus Controller
 
@@ -18,6 +21,7 @@ export default class extends Controller {
   }
 }
 ```
+
 
 ### Data-controller
 
@@ -38,6 +42,7 @@ Set the `data-controller` in a div that contains both:
 - the element listening to an event (the button)
 - the element you want to update (the form)
 
+
 ### Data-target
 
 `data-target` is the equivalent of `document.querySelector`
@@ -56,6 +61,7 @@ Simple form will generate a form tag like this:
 
 `data-target="controller-name.targetName"`
 
+
 ### Targets
 
 ```js
@@ -71,6 +77,7 @@ export default class extends Controller {
 ```
 
 `this.countTarget` returns the first one, `this.countTargets` returns them all
+
 
 ### Connect
 
@@ -104,6 +111,7 @@ Listening to the `click` event on the button (`addEventListener`):
 
 Syntax: `event->controller-name#actionName`
 
+
 ### Action
 
 ```js
@@ -120,6 +128,7 @@ export default class extends Controller {
 
 Let’s expand the form!
 
+
 ### Settings
 
 Use data attributes to add settings to your component
@@ -135,19 +144,8 @@ openModal(event) {
 }
 ```
 
-### Additional actions
 
-```js
-export default class extends Controller {
-  // ...
-  submitOnEnter(event) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault()
-      this.formTarget.submit()
-    }
-  }
-}
-```
+### Additional actions
 
 ```erb
 <div data-controller="inline-modal" data-expanded-height=150>
@@ -161,9 +159,42 @@ export default class extends Controller {
 </div>
 ```
 
-# Stimulus + AJAX: Infinite Scroll
+```js
+export default class extends Controller {
+  // ...
+  submitOnEnter(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
+      this.formTarget.submit()
+    }
+  }
+}
+```
+
+---
+
+## Stimulus + AJAX: Infinite Scroll
 
 Let's build a new component in Stimulus that will use AJAX to fetch new pages of reviews as we scroll down.
+
+
+### Listen to the scroll
+
+Detect when the user has scrolled to the bottom of the reviews
+
+```js
+import { Controller } from "stimulus";
+
+export default class extends Controller {
+  connect() {
+    document.addEventListener('scroll', _ => {
+      if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+        console.log("Scrolled to bottom of the screen!")
+      }
+    })
+  }
+}
+```
 
 
 ### Paginate the reviews
@@ -184,6 +215,7 @@ gem 'will_paginate'
     @reviews = @restaurant.reviews.paginate(page: params[:page], per_page: 10)
   end
 ```
+
 
 ### Render json
 
@@ -207,6 +239,7 @@ Rails controllers can render different formats based on the request’s “Accep
 ```
 
 It will answer to our fetch call with a JSON file
+
 
 ### Fetch reviews
 
@@ -235,9 +268,11 @@ export default class extends Controller {
 
 Don’t forget the “Accept” header!
 
+
 ### Problem
 
 The front-end doesn't have access to our HTML partials
+
 
 ### Update the view
 
@@ -254,6 +289,7 @@ Create a `page` partial for the reviews
 <!-- app/views/restaurants/show.html.erb -->
 <%= render 'reviews/page', reviews: @reviews %>
 ```
+
 
 ### Render to string
 
@@ -280,6 +316,7 @@ We want to send the pre-formatted cards to our front-end
     end
   end
 ```
+
 
 ### Insert in the DOM
 
