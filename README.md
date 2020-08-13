@@ -1,10 +1,8 @@
 # Creating JavaScript components with Stimulus
 
-
 ## Inline Modal
 
 Let's create an "inline modal" component for the `reviews#new` form, that expands when we click on a button.
-
 
 ### Stimulus Controller
 
@@ -20,7 +18,6 @@ export default class extends Controller {
   }
 }
 ```
-
 
 ### Data-controller
 
@@ -41,7 +38,6 @@ Set the `data-controller` in a div that contains both:
 - the element listening to an event (the button)
 - the element you want to update (the form)
 
-
 ### Data-target
 
 `data-target` is the equivalent of `document.querySelector`
@@ -60,7 +56,6 @@ Simple form will generate a form tag like this:
 
 `data-target="controller-name.targetName"`
 
-
 ### Targets
 
 ```js
@@ -76,7 +71,6 @@ export default class extends Controller {
 ```
 
 `this.countTarget` returns the first one, `this.countTargets` returns them all
-
 
 ### Connect
 
@@ -110,7 +104,6 @@ Listening to the `click` event on the button (`addEventListener`):
 
 Syntax: `event->controller-name#actionName`
 
-
 ### Action
 
 ```js
@@ -127,7 +120,6 @@ export default class extends Controller {
 
 Let’s expand the form!
 
-
 ### Settings
 
 Use data attributes to add settings to your component
@@ -142,7 +134,6 @@ openModal(event) {
   event.currentTarget.remove() // Remove the button after expanding the form
 }
 ```
-
 
 ### Additional actions
 
@@ -170,7 +161,6 @@ export default class extends Controller {
 </div>
 ```
 
-
 # Stimulus + AJAX: Infinite Scroll
 
 Let's build a new component in Stimulus that will use AJAX to fetch new pages of reviews as we scroll down.
@@ -195,7 +185,6 @@ gem 'will_paginate'
   end
 ```
 
-
 ### Render json
 
 Rails controllers can render different formats based on the request’s “Accept” header:
@@ -218,7 +207,6 @@ Rails controllers can render different formats based on the request’s “Accep
 ```
 
 It will answer to our fetch call with a JSON file
-
 
 ### Fetch reviews
 
@@ -247,10 +235,9 @@ export default class extends Controller {
 
 Don’t forget the “Accept” header!
 
-
 ### Problem
-#### The front-end doesn't have access to our HTML partials
 
+The front-end doesn't have access to our HTML partials
 
 ### Update the view
 
@@ -267,7 +254,6 @@ Create a `page` partial for the reviews
 <!-- app/views/restaurants/show.html.erb -->
 <%= render 'reviews/page', reviews: @reviews %>
 ```
-
 
 ### Render to string
 
@@ -294,7 +280,6 @@ We want to send the pre-formatted cards to our front-end
     end
   end
 ```
-
 
 ### Insert in the DOM
 
