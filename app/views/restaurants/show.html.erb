@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
       <h1><%= @restaurant.name %></h1>
       <p class="mb-5"><%= @restaurant.address %></p>
 
@@ -13,14 +13,6 @@
           [ @restaurant, @review ],
           html: { data: { target: 'inline-modal.form' } },
           remote: true) do |f| %>
-          
-          <div class="star-rating mb-5">
-            <input type="radio" name="review[rating]" value="1" />
-            <input type="radio" name="review[rating]" value="2" />
-            <input type="radio" name="review[rating]" value="3" checked />
-            <input type="radio" name="review[rating]" value="4" />
-            <input type="radio" name="review[rating]" value="5" />
-          </div>
 
           <%= f.input :content,
             as: :text,
@@ -29,6 +21,7 @@
               placeholder: 'Press enter to submit your review.',
               data: { action: 'keydown->inline-modal#submitOnEnter' }
             } %>
+          <%= f.submit "Submit your review", class: 'btn btn-primary w-100' %>
         <% end %>
       </div>
 

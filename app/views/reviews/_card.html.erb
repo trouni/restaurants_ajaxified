@@ -1,14 +1,6 @@
 <div class="card my-3">
-  <div class="card-header text-center text-warning">
-    <% review.rating.times do %>
-    <i class="fas fa-star"></i>
-    <% end %>
-    <% (5 - review.rating).times do %>
-    <i class="far fa-star"></i>
-    <% end %>
-  </div>
+  <div class="card-header text-center">Review #<%= review.id %></div>
   <div class="card-body">
-    <h5 class="card-title">Review #<%= review.id %></h5>
     <p class="card-text"><%= simple_format review.content %></p>
   </div>
 </div>
