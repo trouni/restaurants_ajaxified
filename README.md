@@ -7,6 +7,26 @@
 Let's create an "inline modal" component for the `reviews#new` form, that expands when we click on a button.
 
 
+Let's do it in pure **JavaScript**
+
+
+### Stimulus JS
+
+A JavaScript [library](https://github.com/stimulusjs/stimulus) that pairs well with Turbolinks.
+
+Read the [Handbook](https://stimulusjs.org/handbook/origin)
+
+
+### Stimulus in Rails
+Quick setup in rails:
+
+```shell
+rails webpacker:install:stimulus
+```
+
+Check your app/javascript/packs/application.js
+
+
 ### Stimulus Controller
 
 ```shell
@@ -172,6 +192,20 @@ export default class extends Controller {
 }
 ```
 
+
+### Stimulus takeaways
+
+- `querySelector` is replaced by `data-target`
+- `addEventListener` is replaced by `data-action`
+- the `data-controller` wraps the other elements
+
+
+### Syntax
+
+- `data-controller="controller-name"`
+- `data-target="controller-name.targetName"`
+- `data-action="event->controller-name#actionName"`
+  
 ---
 
 ## Stimulus + AJAX: Infinite Scroll
@@ -338,3 +372,7 @@ export default class extends Controller {
   }
 }
 ```
+
+---
+
+## HAPPY AJAXIFICATION!
