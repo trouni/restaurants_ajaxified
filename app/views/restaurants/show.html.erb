@@ -1,24 +1,46 @@
-<div class="container" data-controller="expand">
+<div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <h1><%= @restaurant.name %> <small><%= @restaurant.address %></small></h1>
-      <h2>
-        <%= pluralize @restaurant.reviews.size, "review" %>
-      </h2>
+      <h1><%= @restaurant.name %></h1>
+      <p class="mb-5"><%= @restaurant.address %></p>
 
-      <button class="btn btn-primary" data-action="click->expand#openElement">Leave a review</button>
-      <div data-target="expand.elementToExpand">
-        <%= simple_form_for([ @restaurant, @review ], remote: true) do |f| %>
-          <%= f.input :rating, input_html: { min: 1, max: 5, value: 5 } %>
-          <%= f.input :content, as: :text %>
-          <%= f.button :submit, class: 'btn btn-primary' %>
+      <div data-controller="inline-modal" data-expanded-height=150>
+        <button
+          class="btn btn-outline-primary w-100"
+          data-action="click->inline-modal#openModal">Leave a review</button>
+
+        <%= simple_form_for(
+          [ @restaurant, @review ],
+          html: { data: { target: 'inline-modal.form' } },
+          remote: true) do |f| %>
+          
+          <div class="star-rating mb-5">
+            <input type="radio" name="review[rating]" value="1" />
+            <input type="radio" name="review[rating]" value="2" />
+            <input type="radio" name="review[rating]" value="3" checked />
+            <input type="radio" name="review[rating]" value="4" />
+            <input type="radio" name="review[rating]" value="5" />
+          </div>
+
+          <%= f.input :content,
+            as: :text,
+            label: false,
+            input_html: {
+              placeholder: 'Press enter to submit your review.',
+              data: { action: 'keydown->inline-modal#submitOnEnter' }
+            } %>
         <% end %>
       </div>
 
-      <div id="reviews" data-controller="infinite-scroll" data-target="infinite-scroll.reviews">
+      <div
+        id="reviews"
+        class="text-center"
+        data-controller="infinite-scroll">
+        
         <% if @restaurant.reviews.blank? %>
         Be the first to leave a review for <%= @restaurant.name %>
         <% else %>
+          <p class="mt-5"><%= pluralize @restaurant.reviews.size, "review" %></p>
           <%= render 'reviews/page', reviews: @reviews %>
         <% end %>
       </div>

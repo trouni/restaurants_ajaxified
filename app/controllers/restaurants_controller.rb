@@ -11,7 +11,9 @@ class RestaurantsController < ApplicationController
       format.html
       format.json do
         render json: {
-          reviews: render_to_string(partial: 'reviews/page', locals: { reviews: @reviews }, formats: :html)
+          restaurant: @restaurant,
+          reviews: @reviews,
+          reviewsHTML: render_to_string(partial: 'reviews/page', locals: { reviews: @reviews }, formats: :html)
         }
       end
     end
