@@ -1,4 +1,5 @@
-## Creating JavaScript components with Stimulus
+# Creating JavaScript components with Stimulus
+
 
 ## Inline Modal
 
@@ -170,7 +171,7 @@ export default class extends Controller {
 ```
 
 
-## Stimulus + AJAX: Infinite Scroll
+# Stimulus + AJAX: Infinite Scroll
 
 Let's build a new component in Stimulus that will use AJAX to fetch new pages of reviews as we scroll down.
 
@@ -247,7 +248,8 @@ export default class extends Controller {
 Don’t forget the “Accept” header!
 
 
-### Problem: the front-end doesn't have access to our HTML partials
+### Problem
+#### The front-end doesn't have access to our HTML partials
 
 
 ### Update the view
