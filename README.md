@@ -135,12 +135,12 @@ Let’s expand the form!
 Use data attributes to add settings to your component
 
 ```erb
-  <div data-controller="inline-modal" data-expanded-height="150">
+  <div data-controller="inline-modal" data-expanded-height="150px">
 ```
 
 ```js
 openModal(event) {
-  this.formTarget.style.height = this.element.dataset.expandedHeight + 'px'
+  this.formTarget.style.height = this.element.dataset.expandedHeight
   event.currentTarget.remove() // Remove the button after expanding the form
 }
 ```

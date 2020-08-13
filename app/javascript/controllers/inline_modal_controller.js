@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   openModal(event) {
-    this.formTarget.style.height = this.element.dataset.expandedHeight + 'px'
+    this.formTarget.style.height = this.element.dataset.expandedHeight
     event.currentTarget.remove()
   }
 
