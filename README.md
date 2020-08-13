@@ -2,7 +2,7 @@
 
 ---
 
-## Example component: Inline Modal
+## Simple Component: Inline Modal
 
 Let's create an "inline modal" component for the `reviews#new` form, that expands when we click on a button.
 
