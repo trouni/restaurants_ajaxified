@@ -95,6 +95,7 @@ export default class extends Controller {
 }
 ```
 
+
 ### Data-Action
 
 Listening to the `click` event on the button (`addEventListener`):
@@ -180,6 +181,12 @@ Let's build a new component in Stimulus that will use AJAX to fetch new pages of
 
 ### Listen to the scroll
 
+Create a new controller for this new component
+
+```shell
+touch app/javascript/controllers/infinite_scroll_controller.js
+```
+
 Detect when the user has scrolled to the bottom of the reviews
 
 ```js
@@ -243,19 +250,18 @@ It will answer to our fetch call with a JSON file
 
 ### Fetch reviews
 
-Create a new controller for this new component
-
-```shell
-touch app/javascript/controllers/infinite_scroll_controller.js
-```
-
 ```js
 import { Controller } from "stimulus";
 
 export default class extends Controller {
   connect() {
     let page = 1
-    this.loadPage(page)
+    document.addEventListener('scroll', _ => {
+      if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+        page += 1
+        this.loadPage(page)
+      }
+    })
   }
 
   loadPage(page) {
@@ -320,22 +326,11 @@ We want to send the pre-formatted cards to our front-end
 
 ### Insert in the DOM
 
-Load the page of reviews when reaching the bottom of the screen
-
 ```js
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  connect() {
-    let page = 1
-    document.addEventListener('scroll', _ => {
-      if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-        page += 1
-        this.loadPage(page)
-      }
-    })
-  }
-
+  // ...
   loadPage(page) {
     fetch(`?page=${page}`, { headers: { Accept: 'application/json' }})
     .then(response => response.json())
